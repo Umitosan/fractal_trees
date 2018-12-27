@@ -2,21 +2,18 @@
 
 var sizeRatio = 0.7;
 var treeAngle = 15;
-var treeAngleVel = 0.01;
+var treeAngleVel = 0.08;
 
 function resetTreeExtras() {
   sizeRatio = 0.7;
   treeAngle = 15;
-  treeAngleVel = 0.01;
+  treeAngleVel = 0.08;
 }
 
 function Tree(x,y) {
   this.seedX = x;
   this.seedY = y;
   this.size = 200; // pixel size of main trunk
-  this.sizeRatio = 0.6;
-  this.treeAngle = 10;
-  this.reeAngleVel = 0.3;
 
   this.init = function() {
     console.log('tree init');
