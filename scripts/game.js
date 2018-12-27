@@ -11,20 +11,21 @@ function Game(updateDur) {
   this.bg = new Image();
   this.pausedTxt = undefined;
   this.mode = 'init';
+  this.tree = undefined;
 
   this.init = function() {
     this.bg.src = 'bg1.png';
+    let newTree = new Tree(canW/2,canH-10);
+    newTree.init();
+    this.tree = newTree;
     this.lastUpdate = performance.now();
   };
 
   this.pauseIt = function() {
     myGame.paused = true;
-    // this.pausedTxt.show = true;
   };
   this.unpauseIt = function() {
     myGame.paused = false;
-    // this.pausedTxt.show = false;
-    // this prevents pac from updating many times after UNpausing
     this.lastUpdate = performance.now();
     this.timeGap = 0;
   };
@@ -35,7 +36,7 @@ function Game(updateDur) {
   };
 
   this.draw = function() {  // draw everything!
-
+    this.tree.draw();
   }; // end draw
 
   this.update = function() {
