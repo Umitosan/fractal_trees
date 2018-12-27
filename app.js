@@ -55,7 +55,7 @@ var State = {
 
 function softReset() {
   console.log('soft reset!');
-  resetTreeExtras()
+  resetTreeExtras();
   myGame = undefined;
   State = {
     myReq: undefined,
