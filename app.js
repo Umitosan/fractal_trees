@@ -8,7 +8,7 @@ var CANVAS,
     myGame;
 var myColors = new Colors();
 
-var defaultSimSpeed = 10;
+var defaultSimSpeed = 30;
 
 function Colors() {
   this.black = 'rgba(0, 0, 0, 1)';

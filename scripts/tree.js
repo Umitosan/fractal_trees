@@ -1,12 +1,12 @@
 /*jshint esversion: 6 */
 
 var sizeRatio = 0.7;
-var treeAngle = 10;
+var treeAngle = 15;
 var treeAngleVel = 0.01;
 
 function resetTreeExtras() {
   sizeRatio = 0.7;
-  treeAngle = 10;
+  treeAngle = 15;
   treeAngleVel = 0.01;
 }
 
