@@ -8,7 +8,7 @@ var CANVAS,
     myGame;
 var myColors = new Colors();
 
-var defaultSimSpeed = 70;
+var defaultSimSpeed = 10;
 
 function Colors() {
   this.black = 'rgba(0, 0, 0, 1)';
@@ -55,6 +55,7 @@ var State = {
 
 function softReset() {
   console.log('soft reset!');
+  resetTreeExtras()
   myGame = undefined;
   State = {
     myReq: undefined,
@@ -83,6 +84,7 @@ function softReset() {
                 space: false
               }
   };
+  console.log('myGame = ',myGame);
 }
 
 function updateKeysTotal() {
@@ -338,10 +340,6 @@ $(document).ready(function() {
       myGame.mode = 'sim';
       console.log('mode now sim');
       State.gameStarted = true;
-      // $('#mode-current-status')[0].innerText = 'simulate';
-      let v = $('#speed-slider').val();
-      $('#speed-input').prop("value", v);
-      myGame.updateDuration = (1000/v);
       myGame.lastUpdate = performance.now();
     } else {
       console.log('must reset before starting again');
@@ -355,7 +353,6 @@ $(document).ready(function() {
     State.gameStarted = false;
     myGame.mode = 'draw';
     $('#pause-btn')[0].innerText = 'PAUSE';
-    // $('#mode-current-status')[0].innerText = 'draw';
   });
 
   $('#pause-btn').click(function() {
@@ -366,30 +363,6 @@ $(document).ready(function() {
     } else if (myGame.paused === true) {
       myGame.unpauseIt();
       $('#pause-btn')[0].innerText = 'PAUSE';
-    }
-  });
-
-  //INPUT
-  $('#speed-slider').mousedown(function(e1) {
-    leftMouseDown = true;
-  }).mouseup(function(e2) {
-    leftMouseDown = false;
-  });
-  $('#speed-input').on('change', function(e) {
-    let v = this.value;
-    $('#speed-slider').prop("value", v);
-    if (myGame.mode === 'sim') {
-      myGame.updateDuration = (1000/v);
-    }
-  });
-
-  $('#speed-slider').mousemove(function(e) {
-    if (leftMouseDown === true) {
-      let v = this.value;
-      $('#speed-input').prop("value", v);
-      if (myGame.mode === 'sim') {
-        myGame.updateDuration = (1000/v);
-      }
     }
   });
 

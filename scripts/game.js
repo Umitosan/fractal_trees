@@ -50,7 +50,7 @@ function Game(updateDur) {
                 //   console.log('timesToUpdate = ', timesToUpdate);
                 // }
                 // general update area
-
+                this.tree.update();
               }
               this.lastUpdate = performance.now();
             } // end if

@@ -1,10 +1,22 @@
 /*jshint esversion: 6 */
 
+var sizeRatio = 0.6;
+var treeAngle = 10;
+var treeAngleVel = 0.1;
+
+function resetTreeExtras() {
+  sizeRatio = 0.6;
+  treeAngle = 10;
+  treeAngleVel = 0.1;
+}
 
 function Tree(x,y) {
   this.seedX = x;
   this.seedY = y;
   this.size = 300; // pixel size of main trunk
+  this.sizeRatio = 0.6;
+  this.treeAngle = 10;
+  this.reeAngleVel = 0.1;
 
   this.init = function() {
     console.log('tree init');
@@ -16,7 +28,7 @@ function Tree(x,y) {
     ctx.save();
     ctx.translate(this.seedX,this.seedY);
     ctx.beginPath();
-    ctx.strokeStyle = myColors.black;
+    ctx.strokeStyle = myColors.green;
     ctx.lineWidth = 4;
     ctx.moveTo(0,0);
     ctx.lineTo(0,0-this.size);
@@ -24,12 +36,17 @@ function Tree(x,y) {
     ctx.restore();
 
     // right
-    drawBranch(this.seedX,this.seedY-this.size,this.size/2,25);
-    drawBranch(this.seedX,this.seedY-this.size,this.size/2,-25);
+    drawBranch(this.seedX,this.seedY-this.size,this.size*sizeRatio,treeAngle);
+    // left
+    drawBranch(this.seedX,this.seedY-this.size,this.size*sizeRatio,-treeAngle);
   };
 
   this.update = function() {
-
+    // bounce between max and min angles
+    if ( ((treeAngle + treeAngleVel) > 180) || ((treeAngle + treeAngleVel) < 0) ) {
+      treeAngleVel *= -1;
+    }
+    treeAngle += treeAngleVel;
   };
 
 } // TREE
@@ -42,7 +59,7 @@ function drawBranch(startX,startY,length,angleFromCenter) {
   ctx.rotate(  getRadianAngle(angleFromCenter) );
   ctx.beginPath();
   ctx.strokeStyle = myColors.green;
-  ctx.lineWidth = 3;
+  ctx.lineWidth = 2;
   ctx.moveTo(0,0);
   ctx.lineTo(0,0-length);
   ctx.stroke();
@@ -55,8 +72,8 @@ function drawBranch(startX,startY,length,angleFromCenter) {
   let newX = length * Math.cos(getRadianAngle(90-angleFromCenter));
   let newY = length * Math.sin(getRadianAngle(90-angleFromCenter));
   if (length > 10) { // drawBranch(startX,startY,length,angleFromCenter)
-    drawBranch(startX+newX,startY-newY,length/2,angleFromCenter+25);
-    drawBranch(startX+newX,startY-newY,length/2,angleFromCenter-25);
+    drawBranch(startX+newX,startY-newY,length*sizeRatio,angleFromCenter+treeAngle);
+    drawBranch(startX+newX,startY-newY,length*sizeRatio,angleFromCenter-treeAngle);
   } else {
     // just stop loop
   }
