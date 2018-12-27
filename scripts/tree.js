@@ -16,7 +16,7 @@ function Tree(x,y) {
   this.size = 200; // pixel size of main trunk
   this.sizeRatio = 0.6;
   this.treeAngle = 10;
-  this.reeAngleVel = 0.1;
+  this.reeAngleVel = 0.3;
 
   this.init = function() {
     console.log('tree init');
@@ -28,7 +28,7 @@ function Tree(x,y) {
     ctx.save();
     ctx.translate(this.seedX,this.seedY);
     ctx.beginPath();
-    ctx.strokeStyle = myColors.green;
+    ctx.strokeStyle = myColors.forestGreen;
     ctx.lineWidth = 2;
     ctx.moveTo(0,0);
     ctx.lineTo(0,0-this.size);
@@ -58,7 +58,7 @@ function drawBranch(startX,startY,length,angleFromCenter) {
   ctx.translate(startX,startY);
   ctx.rotate(  getRadianAngle(angleFromCenter) );
   ctx.beginPath();
-  ctx.strokeStyle = myColors.black;
+  ctx.strokeStyle = myColors.forestGreen ;
   ctx.lineWidth = 1;
   ctx.moveTo(0,0);
   ctx.lineTo(0,0-length);
