@@ -288,7 +288,7 @@ function gameLoop(timestamp) {
 
   if ( (State.loopRunning === true) && (State.gameStarted === true) ) { myGame.update(); }
 
-  clearCanvas();
+  // clearCanvas();
   if (State.gameStarted === false) {
     myGame.drawBG();
   } else {

@@ -36,7 +36,11 @@ function Game(updateDur) {
   };
 
   this.draw = function() {  // draw everything!
-    this.tree.draw();
+    if (this.tree.drawnFlag === false) {
+      clearCanvas();
+      this.tree.draw();
+      this.tree.drawnFlag = true;
+    }
   }; // end draw
 
   this.update = function() {
@@ -45,13 +49,14 @@ function Game(updateDur) {
 
             if ( this.timeGap >= this.updateDuration ) { // this update is restricted to updateDuration
               let timesToUpdate = this.timeGap / this.updateDuration;
-              for (let i=1; i < timesToUpdate; i++) { // update children objects
-                // if (timesToUpdate > 2) {
-                //   console.log('timesToUpdate = ', timesToUpdate);
-                // }
-                // general update area
-                this.tree.update();
-              }
+              // for (let i=1; i < timesToUpdate; i++) { // update children objects
+              //   // if (timesToUpdate > 2) {
+              //   //   console.log('timesToUpdate = ', timesToUpdate);
+              //   // }
+              //   // general update area
+              //   // this.tree.update();
+              // }
+              // this.tree.update();
               this.lastUpdate = performance.now();
             } // end if
 
